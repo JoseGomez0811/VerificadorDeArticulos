@@ -6,7 +6,9 @@
 package Interfaces;
 
 import Clases.HashTable;
+import Clases.Main;
 import Clases.ManejoDeArchivo;
+import java.io.File;
 
 /**
  *
@@ -18,8 +20,9 @@ public class VentanaPrueba extends javax.swing.JFrame {
      * Creates new form VentanaPrueba
      */
     
+    Main main = new Main();
     HashTable hash = new HashTable(1011);
-    ManejoDeArchivo objeto = new ManejoDeArchivo();
+//    ManejoDeArchivo objeto = new ManejoDeArchivo();
     
     public VentanaPrueba() {
         initComponents();
@@ -43,6 +46,7 @@ public class VentanaPrueba extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         Pantallla = new javax.swing.JTextArea();
+        btnBuscar = new javax.swing.JButton();
 
         jScrollPane1.setViewportView(jTree1);
 
@@ -73,6 +77,13 @@ public class VentanaPrueba extends javax.swing.JFrame {
         Pantallla.setRows(5);
         jScrollPane2.setViewportView(Pantallla);
 
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -80,20 +91,22 @@ public class VentanaPrueba extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2)
+                    .addComponent(campoPalabra)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
-                        .addGap(14, 14, 14)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(campoPalabra))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(50, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(30, 30, 30)
                 .addComponent(campoPalabra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -102,7 +115,9 @@ public class VentanaPrueba extends javax.swing.JFrame {
                     .addComponent(jButton1)
                     .addComponent(jButton3)
                     .addComponent(jButton2))
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnBuscar)
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         pack();
@@ -113,13 +128,26 @@ public class VentanaPrueba extends javax.swing.JFrame {
 //        String palabra = campoPalabra.getText();
 //        
 //        hash.insertar(palabra);
-        objeto.leerDatos();
+        File masterData = main.cargarMasterData();
         
-        String[] palabras5 = objeto.cadena6.split(" ");
-        for (int i = 0; i < palabras5.length; i++) {
-            //JOptionPane.showMessageDialog(null, palabras5[i]);
-            hash.insertar(palabras5[i]);
+        if(masterData != null){
+            ManejoDeArchivo objeto = new ManejoDeArchivo(masterData);
+            objeto.leerDatos();
+        
+            String[] palabras = objeto.cadenaAuxiliar.split(" ");
+            for (int i = 0; i < palabras.length; i++) {
+                hash.insertar(palabras[i].toLowerCase());
+            }
         }
+
+
+//        objeto.leerDatos();
+//        
+//        String[] palabras = objeto.cadenaAuxiliar.split(" ");
+//        for (int i = 0; i < palabras.length; i++) {
+//            //JOptionPane.showMessageDialog(null, palabras5[i]);
+//            hash.insertar(palabras[i].toLowerCase());
+//        }
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -133,6 +161,14 @@ public class VentanaPrueba extends javax.swing.JFrame {
 //        hash.imprimir();
         this.Pantallla.setText(hash.imprimir());
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+        String palabra = campoPalabra.getText();
+        
+        hash.buscar(palabra);
+        //        JOptionPane.showMessageDialog(null, hash.buscar(palabra));
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -171,6 +207,7 @@ public class VentanaPrueba extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea Pantallla;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JTextField campoPalabra;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

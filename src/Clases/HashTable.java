@@ -101,11 +101,7 @@ public class HashTable {
         
         if(pTemp != null){
             if(pTemp.getpNext() == null){   //Buscar validacion de que el unico nodo en la tabla sea el que estoy buscando.
-                if(pTemp.getPalabra() == palabra){
-                    existe = true;
-                }else{
-                    existe = false;
-                }
+                existe = true;
             }else{
                 while(pTemp.getpNext() != null && !existe){
                     if(pTemp.getPalabra().equals(palabra)){
@@ -117,8 +113,10 @@ public class HashTable {
             }
         }
         if(existe){
+            JOptionPane.showMessageDialog(null, "Palabra: " + pTemp.getPalabra() + " - Repeticiones: " + pTemp.getRepeticiones());
             return pTemp;
         }else{
+            JOptionPane.showMessageDialog(null, "La palabra a buscar no se encuentra en el texto");
             return null;
         }
     }
@@ -146,6 +144,5 @@ public class HashTable {
             }
         }
         return tabla;
-//        JOptionPane.showMessageDialog(null, tabla);
     }
 }

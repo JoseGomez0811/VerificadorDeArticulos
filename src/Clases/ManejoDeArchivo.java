@@ -19,12 +19,23 @@ import javax.swing.JOptionPane;
  * @author Jose
  */
 public class ManejoDeArchivo {
-    public String cadena6 = "";
-    public String cadena7 = "";
-   
+    public String cadenaAuxiliar = "";
+    private String cadena;
+    private String cadena2 = "";
+    private String cadena3 = "";
+    private String cadena4 = "";
+    private String cadena5 = "";
+    private String cadena6 = ""; 
+    private String cadena7 = "";
+    private String cadena8 = "";
+    private String cadena9 = "";
+    private String cadena10 = "";
     File fichero = new File("test\\texto.txt");
+    public File masterData;
     
-    HashTable hash = new HashTable(10111);
+    public ManejoDeArchivo(File masterData){
+        this.masterData = masterData;
+    }
     
     public ManejoDeArchivo(){
         
@@ -46,43 +57,82 @@ public class ManejoDeArchivo {
 //    }
     
     public void leerDatos(){
+        File file = this.masterData;
         try{
-            FileReader fr = new FileReader("test\\texto.txt");
+            FileReader fr = new FileReader(file);
             BufferedReader br = new BufferedReader(fr);
-            String cadena;
-            String cadena2 = "";
-            String cadena3 = "";
-            String cadena4 = "";
-            String cadena5 = "";
             
             while ((cadena = br.readLine()) != null){
                 cadena2 += cadena + " ";
 
             } 
-            String[] palabras = cadena2.split(",");
+            
+            if(cadena2.contains(",")){
+               String[] palabras = cadena2.split(",");
                 for (int i = 0; i < palabras.length; i++) {
                     cadena3 += palabras[i];
                 }
-//            JOptionPane.showMessageDialog(null, cadena3);
-            String[] palabras2 = cadena3.split("\\.");
-            for (int i = 0; i < palabras2.length; i++) {
-                cadena4 += palabras2[i];
+            cadenaAuxiliar = cadena3;
             }
-//            JOptionPane.showMessageDialog(null, cadena4);
-            String[] palabras3 = cadena4.split("\\(");
-            for (int i = 0; i < palabras3.length; i++) {
-                cadena5 += palabras3[i];
-            }
-//            JOptionPane.showMessageDialog(null, cadena5);
-            String[] palabras4 = cadena5.split("\\)");
-            for (int i = 0; i < palabras4.length; i++) {
-                //JOptionPane.showMessageDialog(null, palabras[i]);
-                cadena6 += palabras4[i];
-            }
-//            JOptionPane.showMessageDialog(null, cadena6);
             
+            if(cadena3.contains(".")){
+                String[] palabras = cadena3.split("\\.");
+                for (int i = 0; i < palabras.length; i++) {
+                    cadena4 += palabras[i];
+                } 
+            cadenaAuxiliar = cadena4;
+            }
+            
+            if(cadena4.contains("(")){
+                String[] palabras = cadena4.split("\\(");
+                for (int i = 0; i < palabras.length; i++) {
+                    cadena5 += palabras[i];
+                }
+            cadenaAuxiliar = cadena5;
+            }
+            
+            if(cadena5.contains(")")){
+                String[] palabras = cadena5.split("\\)");
+                for (int i = 0; i < palabras.length; i++) {
+                    cadena6 += palabras[i];
+                }
+            cadenaAuxiliar = cadena6;
+            }
+            
+            if(cadena6.contains("¿")){
+                String[] palabras = cadena6.split("\\¿");
+                for (int i = 0; i < palabras.length; i++) {
+                    cadena7 += palabras[i];
+                }
+            cadenaAuxiliar = cadena7;
+            }
+            
+            if(cadena7.contains("?")){
+                String[] palabras = cadena7.split("\\?");
+                for (int i = 0; i < palabras.length; i++) {
+                    cadena8 += palabras[i];
+                }
+            cadenaAuxiliar = cadena8;
+            }
+            
+            if(cadena8.contains(":")){
+                String[] palabras = cadena8.split(":");
+                for (int i = 0; i < palabras.length; i++) {
+                    cadena9 += palabras[i];
+                }
+            cadenaAuxiliar = cadena9;
+            }
+            
+            if(cadena9.contains(";")){
+                String[] palabras = cadena9.split(";");
+                for (int i = 0; i < palabras.length; i++) {
+                    cadena10 += palabras[i];
+                }
+            cadenaAuxiliar = cadena10;
+            }
             
             fr.close();
+            
         }catch (Exception ex){
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
