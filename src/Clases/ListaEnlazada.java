@@ -80,8 +80,21 @@ public class ListaEnlazada {
         this.tamano = tamano;
     }
     
+   public NodoHash elementoEn(int indice) {
+       if (indice > tamano || indice < 0) {
+           return null;
+       }
+       
+       return elementoEn(indice, cabeza);
+   }
    
-    
+   private NodoHash elementoEn(int indice, NodoHash nodo) {
+       if (indice == 0) {
+           return nodo;
+       }
+       
+       return elementoEn(indice-1, nodo.getpNext());
+   }
 }
     
 

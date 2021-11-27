@@ -145,4 +145,14 @@ public class HashTable {
         }
         return tabla;
     }
+    
+    public ListaEnlazada ordenarFrecuencias() {
+        ListaEnlazada listaEnlazada = new ListaEnlazada();
+        for (int i = 0; i < size; i++) {
+            if (null != tabla[i]) {
+                listaEnlazada.insertarOrdenado(tabla[i]);
+            }
+        }
+        return listaEnlazada;
+    }
 }
