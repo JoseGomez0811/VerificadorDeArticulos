@@ -8,6 +8,7 @@ package Clases;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.OutputStreamWriter;
@@ -21,7 +22,7 @@ import javax.swing.JOptionPane;
 public class ManejoDeArchivo {
     public String cadenaAuxiliar = "";
     private String cadena;
-    private String cadena2 = "";
+    public String cadena2 = "";
     private String cadena3 = "";
     private String cadena4 = "";
     private String cadena5 = "";
@@ -32,6 +33,7 @@ public class ManejoDeArchivo {
     private String cadena10 = "";
     File fichero = new File("test\\texto.txt");
     public File masterData;
+    private String contenidos;
     
     public ManejoDeArchivo(File masterData){
         this.masterData = masterData;
@@ -61,7 +63,11 @@ public class ManejoDeArchivo {
         try{
             FileReader fr = new FileReader(file);
             BufferedReader br = new BufferedReader(fr);
-            
+            FileInputStream fis = new FileInputStream(file);
+            byte[] data = new byte[(int) file.length()];
+            fis.read(data);
+            fis.close();
+            contenidos = new String(data);
             while ((cadena = br.readLine()) != null){
                 cadena2 += cadena + " ";
 
@@ -136,5 +142,9 @@ public class ManejoDeArchivo {
         }catch (Exception ex){
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
+    }
+
+    public String getContenidos() {
+        return contenidos;
     }
 }
