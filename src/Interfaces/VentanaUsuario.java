@@ -17,17 +17,17 @@ import javax.swing.JOptionPane;
  *
  * @author Jose
  */
-public class VentanaPrueba extends javax.swing.JFrame {
+public class VentanaUsuario extends javax.swing.JFrame {
 
     /**
-     * Creates new form VentanaPrueba
+     * Creates new form VentanaUsuario
      */
     
     Main main = new Main();
     HashTable hash = new HashTable(1011);
 //    ManejoDeArchivo objeto = new ManejoDeArchivo();
     
-    public VentanaPrueba() {
+    public VentanaUsuario() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -106,7 +106,7 @@ public class VentanaPrueba extends javax.swing.JFrame {
         );
         contenedorPreviewLayout.setVerticalGroup(
             contenedorPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(previewTexto, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE)
+            .addComponent(previewTexto, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout panelIzquierdoLayout = new javax.swing.GroupLayout(panelIzquierdo);
@@ -125,7 +125,7 @@ public class VentanaPrueba extends javax.swing.JFrame {
                 .addGap(4, 4, 4)
                 .addComponent(tituloPreview)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(contenedorPreview, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE))
+                .addComponent(contenedorPreview, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE))
         );
 
         panelPreviewFrecuencia.setLeftComponent(panelIzquierdo);
@@ -148,7 +148,7 @@ public class VentanaPrueba extends javax.swing.JFrame {
         panelDerecho.setLayout(panelDerechoLayout);
         panelDerechoLayout.setHorizontalGroup(
             panelDerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(contenedorPantalla, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
+            .addComponent(contenedorPantalla, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
             .addGroup(panelDerechoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(tituloPantalla)
@@ -160,7 +160,7 @@ public class VentanaPrueba extends javax.swing.JFrame {
                 .addGap(5, 5, 5)
                 .addComponent(tituloPantalla)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(contenedorPantalla, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE))
+                .addComponent(contenedorPantalla, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE))
         );
 
         panelPreviewFrecuencia.setRightComponent(panelDerecho);
@@ -332,20 +332,21 @@ public class VentanaPrueba extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaPrueba.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaPrueba.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaPrueba.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaPrueba.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaPrueba().setVisible(true);
+                new VentanaUsuario().setVisible(true);
             }
         });
     }

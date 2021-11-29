@@ -5,7 +5,7 @@
  */
 package Clases;
 
-import Interfaces.VentanaPrueba;
+import Interfaces.VentanaUsuario;
 import java.awt.EventQueue;
 import java.io.File;
 import javax.swing.JFileChooser;
@@ -29,7 +29,7 @@ public class Main {
 //            ManejoDeArchivo objeto = new ManejoDeArchivo(masterData);
 ////            objeto.leerDatos();
 //            
-//            VentanaPrueba ventana = new VentanaPrueba();
+//            VentanaUsuario ventana = new VentanaUsuario();
 //            EventQueue.invokeLater(new Runnable() {
 //                @Override
 //                public void run() {
@@ -39,7 +39,7 @@ public class Main {
 //            });
 //        } 
         
-        VentanaPrueba ventana = new VentanaPrueba();
+        VentanaUsuario ventana = new VentanaUsuario();
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {

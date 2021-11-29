@@ -5,7 +5,9 @@
  */
 package Clases;
 
+import java.awt.Color;
 import javax.swing.JOptionPane;
+import javax.swing.text.DefaultHighlighter;
 
 /**
  *
@@ -13,7 +15,8 @@ import javax.swing.JOptionPane;
  */
 public class RabinKarp {
     public String output = "";
-    public boolean rabin_karp(String pat, String txt){
+    
+    public boolean rabin_karp(String pat, String txt){        
         int m = pat.length();
         int n = txt.length();
         int q = 128;

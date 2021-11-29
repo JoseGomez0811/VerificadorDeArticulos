@@ -23,23 +23,41 @@ public class HashTable {
         }
     }
     
+//    public int hashing2(String clave){
+//        int valor = 0;
+//        int posicion = 1;
+//        
+//        for(int i = 0; i < clave.length(); i++){
+//            if(clave.codePointAt(i) == 32){
+//                valor += 0;
+//            }else if(clave.codePointAt(i) >= 48 && clave.codePointAt(i) <= 57){
+//                valor += ((clave.codePointAt(i) - 47) * posicion);
+//            }else if(clave.codePointAt(i) >= 65 && clave.codePointAt(i) <= 90){
+//                valor += ((clave.codePointAt(i) - 54) * posicion);
+//            }else if(clave.codePointAt(i) >= 97 && clave.codePointAt(i) <= 122){
+//                valor += ((clave.codePointAt(i) - 60) * posicion);
+//            }
+//            posicion++;
+//        }
+//        return (valor % this.size);
+//    }
+    
     public int hashing(String clave){
-        int valor = 0;
-        int posicion = 1;
+        int indice = 0;
         
         for(int i = 0; i < clave.length(); i++){
-            if(clave.codePointAt(i) == 32){
-                valor += 0;
-            }else if(clave.codePointAt(i) >= 48 && clave.codePointAt(i) <= 57){
-                valor += ((clave.codePointAt(i) - 47) * posicion);
-            }else if(clave.codePointAt(i) >= 65 && clave.codePointAt(i) <= 90){
-                valor += ((clave.codePointAt(i) - 54) * posicion);
-            }else if(clave.codePointAt(i) >= 97 && clave.codePointAt(i) <= 122){
-                valor += ((clave.codePointAt(i) - 60) * posicion);
-            }
-            posicion++;
+            indice = clave.codePointAt(i) % 7;
+           
+            while(tabla[indice] != null){
+                if(this.tabla[indice].getPalabra().equals(clave)){
+                    break;
+                }else{
+                    indice++;
+                    indice %= this.size;
+                }
+           }
         }
-        return (valor % this.size);
+        return indice;
     }
     
     public void insertar(String palabra){
