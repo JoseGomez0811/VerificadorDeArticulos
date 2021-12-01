@@ -37,7 +37,7 @@ public class ManejoDeArchivo {
     
     /**
      * Constructor de la clase ManejoDeArchivo
-     * @param masterData Recibe el archivo que el usuario seleccionó
+     * @param masterData Recibe el archivo seleccionado por el usurario
      */
     public ManejoDeArchivo(File masterData){
         this.masterData = masterData;

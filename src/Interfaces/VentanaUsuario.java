@@ -26,6 +26,7 @@ public class VentanaUsuario extends javax.swing.JFrame {
     Main main = new Main();
     HashTable hash = new HashTable(1011);
 //    ManejoDeArchivo objeto = new ManejoDeArchivo();
+    private int cantidadArchivosLeidos = 0;
     
     public VentanaUsuario() {
         initComponents();
@@ -63,6 +64,7 @@ public class VentanaUsuario extends javax.swing.JFrame {
         botonVerificador = new javax.swing.JButton();
         titulo = new javax.swing.JLabel();
         btnBuscar = new javax.swing.JButton();
+        lblInfoLectura = new javax.swing.JLabel();
 
         jScrollPane1.setViewportView(jTree1);
 
@@ -74,12 +76,19 @@ public class VentanaUsuario extends javax.swing.JFrame {
         panelPrincipalLayout.columnWidths = new int[] {0, 8, 0};
         panelPrincipalLayout.rowHeights = new int[] {0, 10, 0, 10, 0, 10, 0};
         panelPrincipal.setLayout(panelPrincipalLayout);
+
+        campoPalabra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoPalabraActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         panelPrincipal.add(campoPalabra, gridBagConstraints);
 
+        panelPreviewFrecuencia.setResizeWeight(0.5);
         panelPreviewFrecuencia.setMinimumSize(new java.awt.Dimension(300, 250));
         panelPreviewFrecuencia.setPreferredSize(new java.awt.Dimension(280, 300));
 
@@ -90,34 +99,22 @@ public class VentanaUsuario extends javax.swing.JFrame {
         tituloPreview.setText("Vista previa");
         tituloPreview.setAlignmentX(0.5F);
 
-        contenedorPreview.setPreferredSize(new java.awt.Dimension(200, 100));
-
         previewTexto.setEditable(false);
         previewTexto.setColumns(20);
         previewTexto.setLineWrap(true);
         previewTexto.setRows(5);
         previewTexto.setToolTipText("");
-
-        javax.swing.GroupLayout contenedorPreviewLayout = new javax.swing.GroupLayout(contenedorPreview.getViewport());
-        contenedorPreview.getViewport().setLayout(contenedorPreviewLayout);
-        contenedorPreviewLayout.setHorizontalGroup(
-            contenedorPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(previewTexto, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-        );
-        contenedorPreviewLayout.setVerticalGroup(
-            contenedorPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(previewTexto, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
-        );
+        contenedorPreview.setViewportView(previewTexto);
 
         javax.swing.GroupLayout panelIzquierdoLayout = new javax.swing.GroupLayout(panelIzquierdo);
         panelIzquierdo.setLayout(panelIzquierdoLayout);
         panelIzquierdoLayout.setHorizontalGroup(
             panelIzquierdoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(contenedorPreview, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
             .addGroup(panelIzquierdoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(tituloPreview)
                 .addContainerGap(84, Short.MAX_VALUE))
+            .addComponent(contenedorPreview, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         panelIzquierdoLayout.setVerticalGroup(
             panelIzquierdoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,7 +122,7 @@ public class VentanaUsuario extends javax.swing.JFrame {
                 .addGap(4, 4, 4)
                 .addComponent(tituloPreview)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(contenedorPreview, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE))
+                .addComponent(contenedorPreview, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         panelPreviewFrecuencia.setLeftComponent(panelIzquierdo);
@@ -247,6 +244,9 @@ public class VentanaUsuario extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         panelPrincipal.add(btnBuscar, gridBagConstraints);
 
+        lblInfoLectura.setText("Leídas 0 palabras únicas de 0 archivos");
+        panelPrincipal.add(lblInfoLectura, new java.awt.GridBagConstraints());
+
         getContentPane().add(panelPrincipal, java.awt.BorderLayout.CENTER);
 
         pack();
@@ -254,41 +254,36 @@ public class VentanaUsuario extends javax.swing.JFrame {
 
     private void botonLlenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLlenarActionPerformed
         // TODO add your handling code here:
-//        String palabra = campoPalabra.getText();
-//        
-//        hash.insertar(palabra);
         File masterData = main.cargarMasterData();
         
         if(masterData != null){
             ManejoDeArchivo objeto = new ManejoDeArchivo(masterData);
             objeto.leerDatos();
-            if (null != objeto.getContenidos()) {
-                previewTexto.setText(objeto.getContenidos());
-            }
+            if (0 == cantidadArchivosLeidos) {
+                    previewTexto.setText(objeto.getContenidos());
+                } else {
+                    String text = previewTexto.getText();
+                    previewTexto.setText(text + "\n" + objeto.getContenidos());
+                }
             String[] palabras = objeto.cadenaAuxiliar.split(" ");
             for (int i = 0; i < palabras.length; i++) {
                 hash.insertar(palabras[i].toLowerCase());
             }
-        }
+            cantidadArchivosLeidos++;
+            actualizarInfoDeLectura(hash.getPalabrasUnicas(), cantidadArchivosLeidos);
 
-//        objeto.leerDatos();
-//        
-//        String[] palabras = objeto.cadenaAuxiliar.split(" ");
-//        for (int i = 0; i < palabras.length; i++) {
-//            //JOptionPane.showMessageDialog(null, palabras5[i]);
-//            hash.insertar(palabras[i].toLowerCase());
-//        }
-        
+        }        
     }//GEN-LAST:event_botonLlenarActionPerformed
 
     private void botonVaciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVaciarActionPerformed
         // TODO add your handling code here:
         hash.vaciado();
+        actualizarInfoDeLectura(0, cantidadArchivosLeidos = 0);
+        previewTexto.setText("");
     }//GEN-LAST:event_botonVaciarActionPerformed
 
     private void botonImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonImprimirActionPerformed
         // TODO add your handling code here:
-//        hash.imprimir();
         this.pantallaFrecuencia.setText(hash.imprimir());
     }//GEN-LAST:event_botonImprimirActionPerformed
 
@@ -297,7 +292,8 @@ public class VentanaUsuario extends javax.swing.JFrame {
         String palabra = campoPalabra.getText();
         
         hash.buscar(palabra);
-        //        JOptionPane.showMessageDialog(null, hash.buscar(palabra));
+        
+        campoPalabra.setText(null);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void botonPalabrasMasUsadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPalabrasMasUsadasActionPerformed
@@ -310,14 +306,20 @@ public class VentanaUsuario extends javax.swing.JFrame {
     private void botonVerificadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVerificadorActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        VentanaVerificar verificador = new VentanaVerificar();
+        VentanaVerificar verificador = new VentanaVerificar(this);
         verificador.setVisible(true);
         
     }//GEN-LAST:event_botonVerificadorActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void campoPalabraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoPalabraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoPalabraActionPerformed
+
+    
+    private void actualizarInfoDeLectura(int numPalabras, int numArchivos) {
+        lblInfoLectura.setText(String.format("Leídas %d palabras únicas de %d archivos", numPalabras, numArchivos));
+    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -364,6 +366,7 @@ public class VentanaUsuario extends javax.swing.JFrame {
     private javax.swing.JScrollPane contenedorPreview;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTree jTree1;
+    private javax.swing.JLabel lblInfoLectura;
     private javax.swing.JPanel panelDerecho;
     private javax.swing.JPanel panelIzquierdo;
     private javax.swing.JSplitPane panelPreviewFrecuencia;

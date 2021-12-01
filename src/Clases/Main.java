@@ -33,7 +33,7 @@ public class Main {
     }
     
     /**
-     * Método que despliega una pantalla que permite seleccionar el archivo a leer
+     * Método que despliega el JFileChooser para poder seleccionar el archivo a leer
      * @return Retrona el archivo seleccionado
      */
     public static File cargarMasterData() {

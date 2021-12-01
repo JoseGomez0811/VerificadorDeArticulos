@@ -11,12 +11,14 @@ package Clases;
  */
 public class RabinKarp {
     public String output = "";
+    private int posicionEncuentro = 0;
+    private int posicionFinal = 0;
     
     /**
      * Método que valida si el fragmento de texto ingresado por el usuario se encunetra en el archivo txt seleccionado
      * @param pat Recibe el fragmento de texto ingresado por el usuario
-     * @param txt Recibe el texto almacenada en el archivo txt seleccionado
-     * @return Retorna true de haber coincidencia entre el fragmento y el texto
+     * @param txt Recibe el texto almacenado en el archivo txt seleccionado
+     * @return Retorna true si hay coincidencia entre el fragmento y el texto
      */
     public boolean rabin_karp(String pat, String txt){        
         int m = pat.length();
@@ -49,7 +51,9 @@ public class RabinKarp {
                 }
                 if(encontrado){
                     retorno = true;
-                    output ="El fragmento fue encontrado en la posicion " + i + "\n" + texto.substring(0, i) + iden1 + texto.substring(i,i+m) + iden2 + texto.substring(i+m);
+                    output ="El fragmento fue encontrado en la posicion " + i + "\n" + texto;
+                    posicionEncuentro = i;
+                    posicionFinal = i + pat.length();
                 }
             }
             if(i < n-m){
@@ -60,5 +64,13 @@ public class RabinKarp {
             }
         }
     return retorno;    
+    }
+    
+    public int getPosicionEncuentro() {
+        return posicionEncuentro;
+    }
+
+    public int getPosicionFinal() {
+        return posicionFinal;
     }
 }

@@ -14,6 +14,8 @@ import javax.swing.JOptionPane;
 public class HashTable {
     NodoHash tabla[];
     int size;
+    private int palabrasUnicas = 0;
+
     
     /**
      * Constructor de la clase HashTable
@@ -28,9 +30,9 @@ public class HashTable {
     }
     
     /**
-     * Método que genera la posición en la que almacenará la palabra a insertar
+     * Método que genera la posición en la que se  almacenará la palabra a insertar
      * @param clave Recibe la palabra que se desea insertar
-     * @return Retorna la posición en que insertará la palabra
+     * @return Retorna la posición en que se insertará la palabra
      */
     public int hashing(String clave){
         int indice = 0;
@@ -74,11 +76,13 @@ public class HashTable {
             }
             if(!existe){
                 int repeticiones = 1;
+                palabrasUnicas++;
                 NodoHash pNew = new NodoHash(palabra, repeticiones);
                 pTemp.setpNext(pNew);
             }
         }else{
             int repeticiones = 1;
+            palabrasUnicas++;
             NodoHash pNew = new NodoHash(palabra, repeticiones);
             this.tabla[posicion] = pNew;
         }
@@ -117,7 +121,7 @@ public class HashTable {
     }
     
     /**
-     * Método que vacía la tabla
+     * Método que borra la tabla
      */
     public void vaciado(){
         for(int i = 0; i < this.size; i++){
@@ -144,6 +148,14 @@ public class HashTable {
             }
         }
         return tabla;
+    }
+    
+    /**
+     * Método que obtiene el número de la variable palabrasUnicas
+     * @return Retorna la información de palabrasUnicas
+     */
+    public int getPalabrasUnicas() {
+        return palabrasUnicas;
     }
     
     /**
