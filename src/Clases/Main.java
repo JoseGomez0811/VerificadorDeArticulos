@@ -23,32 +23,19 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-//        File masterData = cargarMasterData();
-//        
-//        if(masterData != null){
-//            ManejoDeArchivo objeto = new ManejoDeArchivo(masterData);
-////            objeto.leerDatos();
-//            
-//            VentanaUsuario ventana = new VentanaUsuario();
-//            EventQueue.invokeLater(new Runnable() {
-//                @Override
-//                public void run() {
-//                    ventana.setVisible(true);
-//                    //ventana.addWindowListener(new AdaptadorVentanaInicial());
-//                }
-//            });
-//        } 
-        
         VentanaUsuario ventana = new VentanaUsuario();
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
                 ventana.setVisible(true);
-                //ventana.addWindowListener(new AdaptadorVentanaInicial());
             }
         });
     }
     
+    /**
+     * Método que despliega una pantalla que permite seleccionar el archivo a leer
+     * @return Retrona el archivo seleccionado
+     */
     public static File cargarMasterData() {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setAcceptAllFileFilterUsed(false);

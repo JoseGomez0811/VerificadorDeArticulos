@@ -14,11 +14,17 @@ public class ListaEnlazada {
     private NodoHash cabeza;
     private int tamano;
 
+    /**
+     * cosntructor de la clase ListaEnlazada
+     */
     public ListaEnlazada() {
         cabeza = null;
         tamano = 0;
     }
     
+    /**
+     * Método que imprime la lista enlazada
+     */
     public void imprimir() {
         NodoHash actual = cabeza;
         while (actual != null) {
@@ -28,12 +34,19 @@ public class ListaEnlazada {
         System.out.print(" NULL\n");
     }
     
-    
+    /**
+     * Método que valida si la lista está vacía
+     * @return Retorna null si la lista está vacía
+     */
     public boolean esVacia(){
         return cabeza == null;
     
     }
     
+    /**
+     * Método que inserta los elementos en la lista
+     * @param nodo Recibe el nodo con el elemento que se desea insertar
+     */
     public void insertarOrdenado(NodoHash nodo) {
         if (esVacia()) {
             cabeza = nodo;
@@ -63,38 +76,58 @@ public class ListaEnlazada {
         tamano++;
     }
 
+    /**
+     * Método que retorna la información de cabeza
+     * @return Retorna cabeza
+     */
     public NodoHash getCabeza() {
         return cabeza;
     }
 
-
+    /**
+     * Método que retorna el tamaño de la lista
+     * @return Retorna tamano
+     */
     public int getTamano() {
         return tamano;
     }
 
+    /**
+     * Método que define a cabeza
+     * @param cabeza Recibe el elemento a almacenar en cabeza
+     */
     public void setCabeza(NodoHash cabeza) {
         this.cabeza = cabeza;
     }
-
+    
+    /**
+     * Metodo que define el tamaño de la lista
+     * @param tamano Recibe el tamaño de la lista
+     */
     public void setTamano(int tamano) {
         this.tamano = tamano;
     }
     
-   public NodoHash elementoEn(int indice) {
-       if (indice > tamano || indice < 0) {
-           return null;
-       }
-       
-       return elementoEn(indice, cabeza);
-   }
-   
-   private NodoHash elementoEn(int indice, NodoHash nodo) {
-       if (indice == 0) {
-           return nodo;
-       }
-       
-       return elementoEn(indice-1, nodo.getpNext());
-   }
+//    /**
+//     * Método que desine
+//     * @param indice
+//     * @return 
+//     */
+//    public NodoHash elementoEn(int indice) {
+//       if (indice > tamano || indice < 0) {
+//           return null;
+//       }
+//       
+//       return elementoEn(indice, cabeza);
+//   }
+//   
+//    private NodoHash elementoEn(int indice, NodoHash nodo) {
+//       if (indice == 0) {
+//           return nodo;
+//       }
+//       
+//       return elementoEn(indice-1, nodo.getpNext());
+//   }
 }
     
 

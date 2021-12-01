@@ -5,10 +5,6 @@
  */
 package Clases;
 
-import java.awt.Color;
-import javax.swing.JOptionPane;
-import javax.swing.text.DefaultHighlighter;
-
 /**
  *
  * @author SebasBD
@@ -16,6 +12,12 @@ import javax.swing.text.DefaultHighlighter;
 public class RabinKarp {
     public String output = "";
     
+    /**
+     * Método que valida si el fragmento de texto ingresado por el usuario se encunetra en el archivo txt seleccionado
+     * @param pat Recibe el fragmento de texto ingresado por el usuario
+     * @param txt Recibe el texto almacenada en el archivo txt seleccionado
+     * @return Retorna true de haber coincidencia entre el fragmento y el texto
+     */
     public boolean rabin_karp(String pat, String txt){        
         int m = pat.length();
         int n = txt.length();

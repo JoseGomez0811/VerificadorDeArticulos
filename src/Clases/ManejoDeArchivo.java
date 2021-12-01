@@ -35,29 +35,24 @@ public class ManejoDeArchivo {
     public File masterData;
     private String contenidos;
     
+    /**
+     * Constructor de la clase ManejoDeArchivo
+     * @param masterData Recibe el archivo que el usuario seleccionó
+     */
     public ManejoDeArchivo(File masterData){
         this.masterData = masterData;
     }
     
+    /**
+     * Cosntructor de la clase ManejoDeArchivo
+     */
     public ManejoDeArchivo(){
         
     }
     
-//    public void escribirDatosA(String producto2, int stock2){
-//       producto = producto2;
-//       stock = stock2;
-//       
-//       try{
-//           BufferedWriter escribir = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(ficheroA, true)));
-//           escribir.write(producto + "," + stock);
-//           escribir.write("\n");
-//           JOptionPane.showMessageDialog(null, "El producto ha sido guardado exitosamente");
-//           escribir.close();
-//       }catch (Exception ex){
-//           JOptionPane.showMessageDialog(null, ex.getMessage());
-//       }
-//    }
-    
+    /**
+     * Método que lee el archivo seleccionado por el usuario
+     */
     public void leerDatos(){
         File file = this.masterData;
         try{
@@ -144,6 +139,10 @@ public class ManejoDeArchivo {
         }
     }
 
+    /**
+     * ;Metodo que obtiene la información almacenada en el archivo txt
+     * @return Retorna la informacion almacenada en el archivo txt
+     */
     public String getContenidos() {
         return contenidos;
     }

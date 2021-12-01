@@ -13,8 +13,12 @@ import javax.swing.JOptionPane;
  */
 public class HashTable {
     NodoHash tabla[];
-    int size; // 10111
+    int size;
     
+    /**
+     * Constructor de la clase HashTable
+     * @param size Recibe el tamaño de la tabla
+     */
     public HashTable(int size){
         this.size = size;
         this.tabla = new NodoHash[this.size];
@@ -23,25 +27,11 @@ public class HashTable {
         }
     }
     
-//    public int hashing2(String clave){
-//        int valor = 0;
-//        int posicion = 1;
-//        
-//        for(int i = 0; i < clave.length(); i++){
-//            if(clave.codePointAt(i) == 32){
-//                valor += 0;
-//            }else if(clave.codePointAt(i) >= 48 && clave.codePointAt(i) <= 57){
-//                valor += ((clave.codePointAt(i) - 47) * posicion);
-//            }else if(clave.codePointAt(i) >= 65 && clave.codePointAt(i) <= 90){
-//                valor += ((clave.codePointAt(i) - 54) * posicion);
-//            }else if(clave.codePointAt(i) >= 97 && clave.codePointAt(i) <= 122){
-//                valor += ((clave.codePointAt(i) - 60) * posicion);
-//            }
-//            posicion++;
-//        }
-//        return (valor % this.size);
-//    }
-    
+    /**
+     * Método que genera la posición en la que almacenará la palabra a insertar
+     * @param clave Recibe la palabra que se desea insertar
+     * @return Retorna la posición en que insertará la palabra
+     */
     public int hashing(String clave){
         int indice = 0;
         
@@ -60,6 +50,10 @@ public class HashTable {
         return indice;
     }
     
+    /**
+     * Método que inserta las palabras en la tabla
+     * @param palabra Recibe la palabra que se desea insertar
+     */
     public void insertar(String palabra){
         int posicion = hashing(palabra);
         boolean existe = false;
@@ -88,37 +82,20 @@ public class HashTable {
             NodoHash pNew = new NodoHash(palabra, repeticiones);
             this.tabla[posicion] = pNew;
         }
-//        JOptionPane.showMessageDialog(null, "OK");
     }
     
-//    public void insertar2(String palabra){
-//        int posicion = hashing(palabra);
-//        //int repeticiones = 0;
-//        NodoHash pTemp = this.tabla[posicion];
-//        
-//        if(pTemp != null){
-//            if(pTemp.getPalabra().equals(palabra)){
-//                int repeticiones = pTemp.getRepeticiones() + 1;
-//                NodoHash pAux = new NodoHash(palabra, repeticiones);  //Posible cambio: NodoHash pAux = new NodoHash(palabra, repeticiones);
-//                while(pTemp.getpNext() != null){
-//                    pTemp = pTemp.getpNext();
-//                }
-//                pTemp.setpNext(pAux);
-//            }
-//        }else{
-//            int repeticiones = 0;
-//            NodoHash pAux = new NodoHash(palabra, repeticiones);  //Posible cambio: NodoHash pAux = new NodoHash(palabra, repeticiones);
-//            this.tabla[posicion] = pAux;
-//        }
-//    }
-    
+    /**
+     * Método que busca una palabra en la tabla
+     * @param palabra Recibe la palabra que se desea buscar
+     * @return Retorna la palabra a buscar con el número de repeticiones
+     */
     public NodoHash buscar(String palabra){
         int posicion = hashing(palabra);
         NodoHash pTemp = this.tabla[posicion];
         boolean existe = false;
         
         if(pTemp != null){
-            if(pTemp.getpNext() == null){   //Buscar validacion de que el unico nodo en la tabla sea el que estoy buscando.
+            if(pTemp.getpNext() == null){
                 existe = true;
             }else{
                 while(pTemp.getpNext() != null && !existe){
@@ -139,23 +116,28 @@ public class HashTable {
         }
     }
     
+    /**
+     * Método que vacía la tabla
+     */
     public void vaciado(){
         for(int i = 0; i < this.size; i++){
             this.tabla[i] = null;
         }
     }
     
+    /**
+     * Método que imprime la tabla
+     * @return Retorna la información almacenada en la tabla
+     */
     public String imprimir(){
         String tabla = "";
         for(int i = 0; i < this.size; i++){
             if(this.tabla[i] != null){
                 tabla += "Palabra: " + this.tabla[i].getPalabra() + " - Repeticiones: " + this.tabla[i].getRepeticiones() + "\n";
-//                JOptionPane.showMessageDialog(null, "Palabra: " + this.tabla[i].getPalabra() + " - Repeticiones: " + this.tabla[i].getRepeticiones());
                 if(this.tabla[i].getpNext() != null){
                     NodoHash pTemp = this.tabla[i].getpNext();
                     while(pTemp != null){
                         tabla += "Palabra: " + this.tabla[i].getPalabra() + " - Repeticiones: " + this.tabla[i].getRepeticiones() + "\n";
-//                        JOptionPane.showMessageDialog(null, "Palabra: " + pTemp.getPalabra() + " - Repeticiones: " + this.tabla[i].getRepeticiones());
                         pTemp = pTemp.getpNext();
                     }
                 }
@@ -164,6 +146,10 @@ public class HashTable {
         return tabla;
     }
     
+    /**
+     * Método que inserta los elementos de la tabla en una lista simple
+     * @return Retorna la lista simple
+     */
     public ListaEnlazada ordenarFrecuencias() {
         ListaEnlazada listaEnlazada = new ListaEnlazada();
         for (int i = 0; i < size; i++) {

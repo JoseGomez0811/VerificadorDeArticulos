@@ -1,4 +1,3 @@
-Top 10 IDEs For Programmers
 IDE (Integrated Development Environment) is a place where programmers can create their own
 applications by writing the code. Normally the IDEs come with debuggers and compilers, which makes
 the work of programmers much easier. It is a single software in which all parts of development are

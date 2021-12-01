@@ -14,7 +14,12 @@ public class NodoHash {
     private String palabra;
     private int repeticiones;
     
-    public NodoHash(String palabra, int repeticiones){   //Posible cambio: public NodoHash(String palabra, int Repeticiones)
+    /**
+     * Constrictor de la clase NodoHash
+     * @param palabra Recibe las palabras que se encuentran en el archivo txt
+     * @param repeticiones Recibe el número de repeticiones de cada palabra
+     */
+    public NodoHash(String palabra, int repeticiones){
         this.palabra = palabra;
         this.repeticiones = repeticiones;
         this.pNext = null;
