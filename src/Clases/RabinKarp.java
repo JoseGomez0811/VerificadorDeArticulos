@@ -15,6 +15,8 @@ import javax.swing.text.DefaultHighlighter;
  */
 public class RabinKarp {
     public String output = "";
+    private int posicionEncuentro = 0;
+    private int posicionFinal = 0;
     
     public boolean rabin_karp(String pat, String txt){        
         int m = pat.length();
@@ -47,7 +49,9 @@ public class RabinKarp {
                 }
                 if(encontrado){
                     retorno = true;
-                    output ="El fragmento fue encontrado en la posicion " + i + "\n" + texto.substring(0, i) + iden1 + texto.substring(i,i+m) + iden2 + texto.substring(i+m);
+                    output ="El fragmento fue encontrado en la posicion " + i + "\n" + texto;
+                    posicionEncuentro = i;
+                    posicionFinal = i + pat.length();
                 }
             }
             if(i < n-m){
@@ -58,5 +62,13 @@ public class RabinKarp {
             }
         }
     return retorno;    
+    }
+    
+    public int getPosicionEncuentro() {
+        return posicionEncuentro;
+    }
+
+    public int getPosicionFinal() {
+        return posicionFinal;
     }
 }

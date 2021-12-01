@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 public class HashTable {
     NodoHash tabla[];
     int size; // 10111
+    private int palabrasUnicas = 0;
     
     public HashTable(int size){
         this.size = size;
@@ -80,11 +81,13 @@ public class HashTable {
             }
             if(!existe){
                 int repeticiones = 1;
+                palabrasUnicas++;
                 NodoHash pNew = new NodoHash(palabra, repeticiones);
                 pTemp.setpNext(pNew);
             }
         }else{
             int repeticiones = 1;
+            palabrasUnicas++;
             NodoHash pNew = new NodoHash(palabra, repeticiones);
             this.tabla[posicion] = pNew;
         }
@@ -162,6 +165,10 @@ public class HashTable {
             }
         }
         return tabla;
+    }
+    
+    public int getPalabrasUnicas() {
+        return palabrasUnicas;
     }
     
     public ListaEnlazada ordenarFrecuencias() {
